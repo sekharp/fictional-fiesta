@@ -57,3 +57,11 @@
 .cardContainer {
   padding: 2px 16px;
 }
+
+.container p {
+  color: #4e515d;
+  margin: auto;
+  margin-top: 4em;
+  text-align: center;
+  display: block;
+}

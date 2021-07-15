@@ -51,6 +51,7 @@ export default function PeoplePage({ allPeople, allDepartments }) {
         <AvatarFilter onClick={handleFilterByAvatar} />
 
         <div id="people-container">
+          {isEmpty(filteredPeople) && <p>No results found.</p>}
           {map(filteredPeople, (p) => {
             return (
               <div className={style.personCard}>
