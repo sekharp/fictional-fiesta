@@ -7,12 +7,18 @@ import rivetQuery from '@hashicorp/nextjs-scripts/dato/client'
 import SearchBar from '../../components/searchbar/index'
 import { map, isEmpty, filter, debounce, includes, lowerCase } from 'lodash'
 import avatarDefault from './avatar-default.png'
+import AvatarFilter from '../../components/avatar-filter/index'
 
 export default function PeoplePage({ allPeople, allDepartments }) {
   const [searchInput, useSearchInput] = useState('')
+  const [isFilteredByAvatar, useFilterByAvatar] = useState(false)
 
   const handleSearch = ({ target }) => {
     debounceSearch(target.value)
+  }
+
+  const handleFilterByAvatar = () => {
+    useFilterByAvatar(!isFilteredByAvatar)
   }
 
   const debounceSearch = useCallback(
@@ -22,13 +28,14 @@ export default function PeoplePage({ allPeople, allDepartments }) {
     []
   )
 
-  console.log(searchInput)
-
   let filteredPeople = allPeople
   if (!isEmpty(searchInput)) {
     filteredPeople = filter(allPeople, (p) =>
       includes(lowerCase(p.name), lowerCase(searchInput))
     )
+  }
+  if (isFilteredByAvatar) {
+    filteredPeople = filter(allPeople, (p) => !isEmpty(p.avatar?.url))
   }
 
   return (
@@ -40,6 +47,8 @@ export default function PeoplePage({ allPeople, allDepartments }) {
         <h6 className={style.pageSubheader}>Find a HashiCorp Human</h6>
 
         <SearchBar id="searchbar" onChange={handleSearch} />
+
+        <AvatarFilter onClick={handleFilterByAvatar} />
 
         <div id="people-container">
           {map(filteredPeople, (p) => {
