@@ -1,13 +1,29 @@
+import React, { useCallback, useState } from 'react'
 import Nav from '@hashicorp/react-nav'
 import Footer from '@hashicorp/react-footer'
 import style from './style.module.css'
 import query from './query.graphql'
 import rivetQuery from '@hashicorp/nextjs-scripts/dato/client'
 import SearchBar from '../../components/searchbar/index'
-import { map } from 'lodash'
+import { map, isEmpty, filter, debounce } from 'lodash'
 import avatarDefault from './avatar-default.png'
 
 export default function PeoplePage({ allPeople, allDepartments }) {
+  const [searchInput, useSearchInput] = useState('')
+
+  const handleSearch = ({ target }) => {
+    debounceSearch(target.value)
+  }
+
+  const debounceSearch = useCallback(
+    debounce((searchValue: string) => {
+      useSearchInput(searchValue)
+    }, 1000),
+    []
+  )
+
+  console.log(searchInput)
+
   return (
     <>
       <Nav />
@@ -16,7 +32,7 @@ export default function PeoplePage({ allPeople, allDepartments }) {
         <h1 className={style.pageHeader}>HashiCorp Humans</h1>
         <h6 className={style.pageSubheader}>Find a HashiCorp Human</h6>
 
-        <SearchBar id="searchbar" />
+        <SearchBar id="searchbar" onChange={handleSearch} />
 
         <div id="people-container">
           {map(allPeople, (p) => {
