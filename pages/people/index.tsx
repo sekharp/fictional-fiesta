@@ -5,7 +5,7 @@ import style from './style.module.css'
 import query from './query.graphql'
 import rivetQuery from '@hashicorp/nextjs-scripts/dato/client'
 import SearchBar from '../../components/searchbar/index'
-import { map, isEmpty, filter, debounce } from 'lodash'
+import { map, isEmpty, filter, debounce, includes, lowerCase } from 'lodash'
 import avatarDefault from './avatar-default.png'
 
 export default function PeoplePage({ allPeople, allDepartments }) {
@@ -24,6 +24,13 @@ export default function PeoplePage({ allPeople, allDepartments }) {
 
   console.log(searchInput)
 
+  let filteredPeople = allPeople
+  if (!isEmpty(searchInput)) {
+    filteredPeople = filter(allPeople, (p) =>
+      includes(lowerCase(p.name), lowerCase(searchInput))
+    )
+  }
+
   return (
     <>
       <Nav />
@@ -35,7 +42,7 @@ export default function PeoplePage({ allPeople, allDepartments }) {
         <SearchBar id="searchbar" onChange={handleSearch} />
 
         <div id="people-container">
-          {map(allPeople, (p) => {
+          {map(filteredPeople, (p) => {
             return (
               <div className={style.personCard}>
                 <img
