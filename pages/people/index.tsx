@@ -3,6 +3,7 @@ import Footer from '@hashicorp/react-footer'
 import style from './style.module.css'
 import query from './query.graphql'
 import rivetQuery from '@hashicorp/nextjs-scripts/dato/client'
+import SearchBar from '../../components/searchbar/index'
 
 export default function PeoplePage({ allPeople, allDepartments }) {
   return (
@@ -13,6 +14,7 @@ export default function PeoplePage({ allPeople, allDepartments }) {
         <h1 className={style.pageHeader}>HashiCorp Humans</h1>
         <h6 className={style.pageSubheader}>Find a HashiCorp Human</h6>
 
+        <SearchBar id="searchbar" />
         {/* <pre className={style.myData}>{JSON.stringify(allPeople, null, 2)}</pre>
         <pre className={style.myData}>
         {JSON.stringify(allDepartments, null, 2)}
