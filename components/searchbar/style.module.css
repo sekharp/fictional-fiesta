@@ -8,4 +8,8 @@
   border-radius: 5em;
   background-position: 2% 50%;
   background-repeat: no-repeat;
+
+&:focus {
+  border-radius: 0;
+}
 }
