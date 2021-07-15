@@ -5,6 +5,7 @@ import query from './query.graphql'
 import rivetQuery from '@hashicorp/nextjs-scripts/dato/client'
 import SearchBar from '../../components/searchbar/index'
 import { map } from 'lodash'
+import avatarDefault from './avatar-default.png'
 
 export default function PeoplePage({ allPeople, allDepartments }) {
   return (
@@ -16,24 +17,30 @@ export default function PeoplePage({ allPeople, allDepartments }) {
         <h6 className={style.pageSubheader}>Find a HashiCorp Human</h6>
 
         <SearchBar id="searchbar" />
-        {map(allPeople, (p) => {
-          return (
-            <div className={style.personCard}>
-              <img src={p.avatar?.url} />
-              <div className={style.personCardContainer}>
-                <span>
-                  <strong>{p.name}</strong>
-                </span>
-                <br />
-                <span>{p.title}</span>
-                <br />
-                <span>{p.department.name}</span>
-                <br />
+
+        <div id="people-container">
+          {map(allPeople, (p) => {
+            return (
+              <div className={style.personCard}>
+                <img
+                  className={style.avatar}
+                  src={p.avatar?.url || avatarDefault}
+                  alt={p.avatar?.alt}
+                />
+                <div className={style.personCardContainer}>
+                  <span>
+                    <strong>{p.name}</strong>
+                  </span>
+                  <br />
+                  <span>{p.title}</span>
+                  <br />
+                  <span>{p.department.name}</span>
+                  <br />
+                </div>
               </div>
-            </div>
-          )
-        })}
-        <pre className={style.myData}>{JSON.stringify(allPeople, null, 2)}</pre>
+            )
+          })}
+        </div>
         {/* <pre className={style.myData}>
           {JSON.stringify(allDepartments, null, 2)}
         </pre> */}
