@@ -4,6 +4,7 @@ import style from './style.module.css'
 import query from './query.graphql'
 import rivetQuery from '@hashicorp/nextjs-scripts/dato/client'
 import SearchBar from '../../components/searchbar/index'
+import { map } from 'lodash'
 
 export default function PeoplePage({ allPeople, allDepartments }) {
   return (
@@ -15,10 +16,18 @@ export default function PeoplePage({ allPeople, allDepartments }) {
         <h6 className={style.pageSubheader}>Find a HashiCorp Human</h6>
 
         <SearchBar id="searchbar" />
-        {/* <pre className={style.myData}>{JSON.stringify(allPeople, null, 2)}</pre>
-        <pre className={style.myData}>
-        {JSON.stringify(allDepartments, null, 2)}
-      </pre> */}
+        {map(allPeople, (p) => {
+          return (
+            <>
+              <span>{p.name}</span>
+              <br />
+            </>
+          )
+        })}
+        <pre className={style.myData}>{JSON.stringify(allPeople, null, 2)}</pre>
+        {/* <pre className={style.myData}>
+          {JSON.stringify(allDepartments, null, 2)}
+        </pre> */}
         <br />
       </main>
       <Footer />

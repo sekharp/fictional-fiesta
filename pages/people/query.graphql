@@ -7,12 +7,12 @@
 
 query {
   allDepartments(first: 100) {
+    id
     name
     parent {
       id
     }
   }
-
   allPeople(first: 100) {
     name
     avatar {
@@ -20,6 +20,7 @@ query {
     }
     department {
       name
+      id
     }
   }
 }
