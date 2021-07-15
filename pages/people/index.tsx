@@ -30,12 +30,12 @@ export default function PeoplePage({ allPeople, allDepartments }) {
 
   let filteredPeople = allPeople
   if (!isEmpty(searchInput)) {
-    filteredPeople = filter(allPeople, (p) =>
+    filteredPeople = filter(filteredPeople, (p) =>
       includes(lowerCase(p.name), lowerCase(searchInput))
     )
   }
   if (isFilteredByAvatar) {
-    filteredPeople = filter(allPeople, (p) => !isEmpty(p.avatar?.url))
+    filteredPeople = filter(filteredPeople, (p) => !isEmpty(p.avatar?.url))
   }
 
   return (
