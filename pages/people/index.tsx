@@ -18,10 +18,19 @@ export default function PeoplePage({ allPeople, allDepartments }) {
         <SearchBar id="searchbar" />
         {map(allPeople, (p) => {
           return (
-            <>
-              <span>{p.name}</span>
-              <br />
-            </>
+            <div className={style.personCard}>
+              <img src={p.avatar?.url} />
+              <div className={style.personCardContainer}>
+                <span>
+                  <strong>{p.name}</strong>
+                </span>
+                <br />
+                <span>{p.title}</span>
+                <br />
+                <span>{p.department.name}</span>
+                <br />
+              </div>
+            </div>
           )
         })}
         <pre className={style.myData}>{JSON.stringify(allPeople, null, 2)}</pre>
