@@ -38,27 +38,38 @@ export default function PeoplePage({ allPeople, allDepartments }) {
     filteredPeople = filter(filteredPeople, (p) => !isEmpty(p.avatar?.url))
   }
 
-  const parentDepartments = filter(allDepartments, (d) => d.parent === null)
-  const childDepartments = filter(allDepartments, (d) => d.parent !== null)
-  const defineChildDepartments = (parentDept, allChildDepts) => {
-    map(allChildDepts, (c) => {
-      if (parentDept.id === c.parent.id) {
-        parentDept?.children?.push(c)
-      }
-      return c
-    })
-    map(parentDept.children, (c) => {
-      defineChildDepartments(c, allChildDepts)
-    })
-    return parentDept
-  }
-  const departmentsList = map(parentDepartments, (p) => {
-    p = { ...p, children: [] }
-    defineChildDepartments(p, childDepartments)
-    return p
-  })
+  const findSubdepartments = (departmentsList, parentDepartmentId) => {
+    let subdepartments = []
+    map(departmentsList, (department) => {
+      if (department?.parent?.id === parentDepartmentId) {
+        const matchingSubdepartments = findSubdepartments(
+          departmentsList,
+          department.id
+        )
 
-  console.log(departmentsList)
+        if (!isEmpty(matchingSubdepartments)) {
+          department.children = matchingSubdepartments
+        }
+        subdepartments.push(department)
+      }
+    })
+    return subdepartments
+  }
+
+  const arrangeDepartments = (departmentsList) => {
+    const parentDepartments = filter(departmentsList, (d) => !d.parent)
+    const organizedDepartments = map(parentDepartments, (parentDepartment) => {
+      const subDepartments = findSubdepartments(
+        departmentsList,
+        parentDepartment.id
+      )
+      return { ...parentDepartment, children: subDepartments }
+    })
+
+    return organizedDepartments
+  }
+
+  console.log(arrangeDepartments(allDepartments))
 
   return (
     <>
