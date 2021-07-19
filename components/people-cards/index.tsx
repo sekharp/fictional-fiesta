@@ -21,7 +21,7 @@ const PeopleCards = ({ people }) => {
               <br />
               <span>{p.title}</span>
               <br />
-              <span>{p.department.name}</span>
+              <span className={style.departmentName}>{p.department.name}</span>
               <br />
             </div>
           </div>
