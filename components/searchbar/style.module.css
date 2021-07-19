@@ -1,0 +1,16 @@
+.searchbar {
+  text-align: center;
+  margin: 3em auto;
+  margin-bottom: 1em;
+  color: #989cac;
+  display: block;
+  height: 2.5em;
+  width: 35em;
+  border-radius: 5em;
+  background-position: 2% 50%;
+  background-repeat: no-repeat;
+
+  &:focus {
+    border-radius: 0;
+  }
+}

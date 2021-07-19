@@ -7,18 +7,22 @@
 
 query {
   allDepartments(first: 100) {
+    id
     name
     parent {
       id
+      name
     }
   }
-
   allPeople(first: 100) {
     name
+    title
     avatar {
       url
+      alt
     }
     department {
+      id
       name
     }
   }
