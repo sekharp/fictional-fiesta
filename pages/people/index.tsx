@@ -4,7 +4,7 @@ import Footer from '@hashicorp/react-footer'
 import style from './style.module.css'
 import query from './query.graphql'
 import rivetQuery from '@hashicorp/nextjs-scripts/dato/client'
-import { isEmpty, filter, debounce, includes, lowerCase } from 'lodash'
+import { isEmpty, filter, debounce, includes, lowerCase, map } from 'lodash'
 import SearchBar from '../../components/searchbar/index'
 import AvatarFilter from '../../components/avatar-filter/index'
 import PeopleCards from '../../components/people-cards/index'
@@ -38,6 +38,28 @@ export default function PeoplePage({ allPeople, allDepartments }) {
     filteredPeople = filter(filteredPeople, (p) => !isEmpty(p.avatar?.url))
   }
 
+  const parentDepartments = filter(allDepartments, (d) => d.parent === null)
+  const childDepartments = filter(allDepartments, (d) => d.parent !== null)
+  const defineChildDepartments = (parentDept, allChildDepts) => {
+    map(allChildDepts, (c) => {
+      if (parentDept.id === c.parent.id) {
+        parentDept?.children?.push(c)
+      }
+      return c
+    })
+    map(parentDept.children, (c) => {
+      defineChildDepartments(c, allChildDepts)
+    })
+    return parentDept
+  }
+  const departmentsList = map(parentDepartments, (p) => {
+    p = { ...p, children: [] }
+    defineChildDepartments(p, childDepartments)
+    return p
+  })
+
+  console.log(departmentsList)
+
   return (
     <>
       <Nav />
@@ -51,9 +73,6 @@ export default function PeoplePage({ allPeople, allDepartments }) {
         <AvatarFilter onClick={handleFilterByAvatar} />
 
         <PeopleCards people={filteredPeople} />
-        {/* <pre className={style.myData}>
-          {JSON.stringify(allDepartments, null, 2)}
-        </pre> */}
         <br />
       </main>
       <Footer />
