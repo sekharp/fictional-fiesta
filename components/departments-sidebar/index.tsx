@@ -1,7 +1,7 @@
 import style from './style.module.css'
 import { map, isEmpty, filter } from 'lodash'
 
-const DepartmentsSidebar = ({ departments }) => {
+const DepartmentsSidebar = ({ departments, onClick, departmentFilter }) => {
   const findSubdepartments = (departmentsList, parentDepartmentId) => {
     let subdepartments = []
     map(departmentsList, (department) => {
@@ -32,14 +32,19 @@ const DepartmentsSidebar = ({ departments }) => {
 
     return organizedDepartments
   }
-
+  console.log(departmentFilter)
   const renderDepartmentListItems = (departmentsGroup) => {
     return (
       <ul>
         {map(departmentsGroup, (d) => {
           return (
             <li>
-              <span>{d.name}</span>
+              <span
+                className={d.name === departmentFilter ? style.active : ''}
+                onClick={onClick}
+              >
+                {d.name}
+              </span>
               {!isEmpty(d?.children) && renderDepartmentListItems(d.children)}
             </li>
           )
@@ -49,7 +54,11 @@ const DepartmentsSidebar = ({ departments }) => {
   }
 
   return (
-    <div id="departments-sidebar" className={style.departmentsSidebar}>
+    <div
+      id="departments-sidebar"
+      className={style.departmentsSidebar}
+      onClick={onClick}
+    >
       {renderDepartmentListItems(arrangeDepartments(departments))}
     </div>
   )

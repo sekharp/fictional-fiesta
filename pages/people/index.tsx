@@ -13,6 +13,7 @@ import DepartmentsSidebar from '../../components/departments-sidebar/index'
 export default function PeoplePage({ allPeople, allDepartments }) {
   const [searchInput, useSearchInput] = useState('')
   const [isFilteredByAvatar, useFilterByAvatar] = useState(false)
+  const [departmentFilter, useFilterByDepartment] = useState(null)
 
   const handleSearch = ({ target }) => {
     debounceSearch(target.value)
@@ -20,6 +21,10 @@ export default function PeoplePage({ allPeople, allDepartments }) {
 
   const handleFilterByAvatar = () => {
     useFilterByAvatar(!isFilteredByAvatar)
+  }
+
+  const handleFilterByDepartment = ({ target }) => {
+    useFilterByDepartment(target.innerText)
   }
 
   const debounceSearch = useCallback(
@@ -70,8 +75,6 @@ export default function PeoplePage({ allPeople, allDepartments }) {
     return organizedDepartments
   }
 
-  console.log(arrangeDepartments(allDepartments))
-
   return (
     <>
       <Nav />
@@ -85,7 +88,11 @@ export default function PeoplePage({ allPeople, allDepartments }) {
         <AvatarFilter onClick={handleFilterByAvatar} />
 
         <div className={style.container}>
-          <DepartmentsSidebar departments={allDepartments} />
+          <DepartmentsSidebar
+            departments={allDepartments}
+            onClick={handleFilterByDepartment}
+            departmentFilter={departmentFilter}
+          />
 
           <PeopleCards people={filteredPeople} />
         </div>
