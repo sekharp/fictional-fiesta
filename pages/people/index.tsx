@@ -8,6 +8,7 @@ import { isEmpty, filter, debounce, includes, lowerCase, map } from 'lodash'
 import SearchBar from '../../components/searchbar/index'
 import AvatarFilter from '../../components/avatar-filter/index'
 import PeopleCards from '../../components/people-cards/index'
+import DepartmentsSidebar from '../../components/departments-sidebar/index'
 
 export default function PeoplePage({ allPeople, allDepartments }) {
   const [searchInput, useSearchInput] = useState('')
@@ -83,7 +84,12 @@ export default function PeoplePage({ allPeople, allDepartments }) {
 
         <AvatarFilter onClick={handleFilterByAvatar} />
 
-        <PeopleCards people={filteredPeople} />
+        <div className={style.container}>
+          <DepartmentsSidebar departments={allDepartments} />
+
+          <PeopleCards people={filteredPeople} />
+        </div>
+
         <br />
       </main>
       <Footer />
