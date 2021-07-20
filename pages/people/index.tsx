@@ -43,36 +43,11 @@ export default function PeoplePage({ allPeople, allDepartments }) {
   if (isFilteredByAvatar) {
     filteredPeople = filter(filteredPeople, (p) => !isEmpty(p.avatar?.url))
   }
-
-  const findSubdepartments = (departmentsList, parentDepartmentId) => {
-    let subdepartments = []
-    map(departmentsList, (department) => {
-      if (department?.parent?.id === parentDepartmentId) {
-        const matchingSubdepartments = findSubdepartments(
-          departmentsList,
-          department.id
-        )
-
-        if (!isEmpty(matchingSubdepartments)) {
-          department.children = matchingSubdepartments
-        }
-        subdepartments.push(department)
-      }
-    })
-    return subdepartments
-  }
-
-  const arrangeDepartments = (departmentsList) => {
-    const parentDepartments = filter(departmentsList, (d) => !d.parent)
-    const organizedDepartments = map(parentDepartments, (parentDepartment) => {
-      const subDepartments = findSubdepartments(
-        departmentsList,
-        parentDepartment.id
-      )
-      return { ...parentDepartment, children: subDepartments }
-    })
-
-    return organizedDepartments
+  if (departmentFilter.length < 20) {
+    filteredPeople = filter(
+      filteredPeople,
+      (p) => p.department.name === departmentFilter
+    )
   }
 
   return (
