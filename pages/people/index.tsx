@@ -43,7 +43,7 @@ export default function PeoplePage({ allPeople, allDepartments }) {
   if (isFilteredByAvatar) {
     filteredPeople = filter(filteredPeople, (p) => !isEmpty(p.avatar?.url))
   }
-  if (departmentFilter.length < 20) {
+  if (departmentFilter && departmentFilter?.length < 20) {
     filteredPeople = filter(
       filteredPeople,
       (p) => p.department.name === departmentFilter
