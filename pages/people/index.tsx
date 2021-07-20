@@ -4,7 +4,15 @@ import Footer from '@hashicorp/react-footer'
 import style from './style.module.css'
 import query from './query.graphql'
 import rivetQuery from '@hashicorp/nextjs-scripts/dato/client'
-import { isEmpty, filter, debounce, includes, lowerCase, map } from 'lodash'
+import {
+  isEmpty,
+  filter,
+  debounce,
+  includes,
+  lowerCase,
+  map,
+  split,
+} from 'lodash'
 import SearchBar from '../../components/searchbar/index'
 import AvatarFilter from '../../components/avatar-filter/index'
 import PeopleCards from '../../components/people-cards/index'
@@ -14,6 +22,7 @@ export default function PeoplePage({ allPeople, allDepartments }) {
   const [searchInput, useSearchInput] = useState('')
   const [isFilteredByAvatar, useFilterByAvatar] = useState(false)
   const [departmentFilter, useFilterByDepartment] = useState(null)
+  const [expandedDepartments, useExpandedDepartments] = useState([])
 
   const handleSearch = ({ target }) => {
     debounceSearch(target.value)
@@ -25,6 +34,18 @@ export default function PeoplePage({ allPeople, allDepartments }) {
 
   const handleFilterByDepartment = ({ target }) => {
     useFilterByDepartment(target.innerText)
+  }
+
+  const handleDepartmentExpansion = ({ target }) => {
+    const clickedDepartment = split(target.innerText, '\n', 1).shift()
+    if (includes(expandedDepartments, clickedDepartment))
+      useExpandedDepartments(
+        filter(
+          expandedDepartments,
+          (department) => department !== clickedDepartment
+        )
+      )
+    else useExpandedDepartments([...expandedDepartments, clickedDepartment])
   }
 
   const debounceSearch = useCallback(
@@ -67,6 +88,8 @@ export default function PeoplePage({ allPeople, allDepartments }) {
             departments={allDepartments}
             onClick={handleFilterByDepartment}
             departmentFilter={departmentFilter}
+            handleDepartmentItemExpansion={handleDepartmentExpansion}
+            expandedDepartments={expandedDepartments}
           />
 
           <PeopleCards people={filteredPeople} />

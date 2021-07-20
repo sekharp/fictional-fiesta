@@ -8,7 +8,7 @@ const PeopleCards = ({ people }) => {
       {isEmpty(people) && <p>No results found.</p>}
       {map(people, (p) => {
         return (
-          <div className={style.personCard}>
+          <div className={style.personCard} key={p.name}>
             <img
               className={style.avatar}
               src={p.avatar?.url || avatarDefault}
