@@ -75,7 +75,7 @@ export default function PeoplePage({ allPeople, allDepartments }) {
   return (
     <>
       <Nav />
-      <main className={`${style.container} g-container`}>
+      <main className={`${style.main} g-container`}>
         <br />
         <h1 className={style.pageHeader}>HashiCorp Humans</h1>
         <h6 className={style.pageSubheader}>Find a HashiCorp Human</h6>
