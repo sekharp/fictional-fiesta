@@ -33,15 +33,24 @@ const DepartmentsSidebar = ({ departments }) => {
     return organizedDepartments
   }
 
-  console.log(arrangeDepartments(departments))
+  const renderDepartmentListItems = (departmentsGroup) => {
+    return (
+      <ul>
+        {map(departmentsGroup, (d) => {
+          return (
+            <li>
+              <span>{d.name}</span>
+              {!isEmpty(d?.children) && renderDepartmentListItems(d.children)}
+            </li>
+          )
+        })}
+      </ul>
+    )
+  }
 
   return (
     <div id="departments-sidebar" className={style.departmentsSidebar}>
-      <ul>
-        {map(departments, (d) => {
-          return <li>{d.name}</li>
-        })}
-      </ul>
+      {renderDepartmentListItems(arrangeDepartments(departments))}
     </div>
   )
 }
