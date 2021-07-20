@@ -2,8 +2,9 @@
   margin: 0;
   padding: 0;
   width: 25%;
+  display: flex;
 
-@media (max-width: 936px) {
-    display: none
-}
+  @media (max-width: 936px) {
+    display: none;
+  }
 }

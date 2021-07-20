@@ -37,7 +37,11 @@ const DepartmentsSidebar = ({ departments }) => {
 
   return (
     <div id="departments-sidebar" className={style.departmentsSidebar}>
-      test
+      <ul>
+        {map(departments, (d) => {
+          return <li>{d.name}</li>
+        })}
+      </ul>
     </div>
   )
 }

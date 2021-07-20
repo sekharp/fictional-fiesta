@@ -4,12 +4,8 @@
 
 /* ref: https://preset-env.cssdb.org/ */
 
-.myData {
-  color: yellow;
-}
-
 .container {
-  display: block;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 3em;

@@ -4,7 +4,7 @@ import avatarDefault from './avatar-default.png'
 
 const PeopleCards = ({ people }) => {
   return (
-    <div id="people-container">
+    <div id="people-container" className={style.peopleContainer}>
       {isEmpty(people) && <p>No results found.</p>}
       {map(people, (p) => {
         return (
