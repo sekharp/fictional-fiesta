@@ -8,15 +8,15 @@
     display: none;
   }
 
-& span:hover,
-& span.active {
-  color: #1563ff;
-}
+  & span:hover,
+  & span.active {
+    color: #1563ff;
+  }
 
-& .active > ul {
-  display: block;
-  border-left: 1px solid #cbcbcb;
-  margin-left: 0;
-  padding-left: 1em;
-}
+  & .active > ul {
+    display: block;
+    border-left: 1px solid #cbcbcb;
+    margin-left: 0;
+    padding-left: 1em;
+  }
 }
