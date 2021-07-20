@@ -2,54 +2,54 @@
   width: 25%;
   line-height: 2.4em;
 
-& ul {
-  list-style-type: none;
-}
+  & ul {
+    list-style-type: none;
+  }
 
-& li {
-  cursor: pointer;
-}
+  & li {
+    cursor: pointer;
+  }
 
-& > ul {
-  padding-left: 0.5em;
-}
+  & > ul {
+    padding-left: 0.5em;
+  }
 
-& span:hover,
-& span.active {
-  color: #1563ff;
-}
+  & span:hover,
+  & span.active {
+    color: #1563ff;
+  }
 
-& li.expands {
-  list-style-type: none;
-  position: relative;
-  border-left: 1px solid transparent;
-}
+  & li.expands {
+    list-style-type: none;
+    position: relative;
+    border-left: 1px solid transparent;
+  }
 
-& .expands > ul {
-  display: none;
-}
+  & .expands > ul {
+    display: none;
+  }
 
-& .expands.active > ul {
-  display: block;
-  border-left: 1px solid #cbcbcb;
-  margin-left: 0;
-  padding-left: 1em;
-}
+  & .expands.active > ul {
+    display: block;
+    border-left: 1px solid #cbcbcb;
+    margin-left: 0;
+    padding-left: 1em;
+  }
 
-& .expands::before {
-  position: absolute;
-  display: inline-block;
-  left: -10px;
-  top: 10px;
-  width: 0.5em;
-  height: 0.5em;
-}
+  & .expands::before {
+    position: absolute;
+    display: inline-block;
+    left: -10px;
+    top: 10px;
+    width: 0.5em;
+    height: 0.5em;
+  }
 
-& .expands:hover::before {
-  left: -16px;
-}
+  & .expands:hover::before {
+    left: -16px;
+  }
 
-@media (max-width: 936px) {
-    display: none
-}
+  @media (max-width: 936px) {
+    display: none;
+  }
 }

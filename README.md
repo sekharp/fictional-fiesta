@@ -1,5 +1,11 @@
 # HashiCorp Humans!
 
+##
+
+This project follows the spec at this [Figma link](https://www.figma.com/file/xGicP4qkXbMhte4LAYxC4X/HashiCorp---Technical-Screen?node-id=2%3A973) in order to build a mock page to render an employee directory for HashiCorp. It consumes a GraphQL API that returns the first 100 people from an endpoint, as well as a list of the departments at HashiCorp.
+
+## How to run the app locally
+
 Run `npm install` then `npm start`, and visit `http://localhost:3000/people` for the directory.
 
 Current state of progress:
