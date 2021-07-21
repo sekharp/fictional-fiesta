@@ -1,5 +1,5 @@
 import style from './style.module.css'
-import { map, isEmpty, filter, includes, startCase } from 'lodash'
+import { map, isEmpty, filter, includes } from 'lodash'
 import { arrangeDepartments } from './../utils/arrange-departments'
 
 const DepartmentsSidebar = ({
@@ -31,7 +31,7 @@ const DepartmentsSidebar = ({
                 onClick={onClick}
                 key={d.id}
               >
-                {startCase(d.name)}
+                {d.name}
               </span>
               {!isEmpty(d?.children) && renderDepartmentListItems(d.children)}
             </li>
