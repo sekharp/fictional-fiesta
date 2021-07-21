@@ -25,7 +25,8 @@ export default function PeoplePage({ allPeople, allDepartments }) {
   const [expandedDepartments, useExpandedDepartments] = useState([])
 
   const handleSearch = ({ target }) => {
-    debounceSearch(target.value)
+    const searchInput = target.value
+    debounceSearch(searchInput)
   }
 
   const handleFilterByAvatar = () => {
@@ -33,11 +34,12 @@ export default function PeoplePage({ allPeople, allDepartments }) {
   }
 
   const handleFilterByDepartment = ({ target }) => {
-    useFilterByDepartment(target.innerText)
+    const clickedDepartment = target.innerText
+    useFilterByDepartment(clickedDepartment)
   }
 
   const handleDepartmentExpansion = ({ target }) => {
-    const clickedDepartment = split(target.innerText, '\n', 1).shift()
+    const clickedDepartment = target.innerText
     if (includes(expandedDepartments, clickedDepartment))
       useExpandedDepartments(
         filter(
