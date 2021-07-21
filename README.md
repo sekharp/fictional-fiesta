@@ -27,7 +27,11 @@ Run `npm install` then `npm start`, and visit `http://localhost:3000/people` for
 
 I spent the bulk of my time (~10 hours) meeting the Figma spec and coding the baseline functionality. The only issue from the baseline spec that I had at the end was getting a list item image to use a custom caret image png asset. I used a `>` character as the placeholder instead in the interest of time.
 
-Had I had more time, the first area I would've focused was testing. I've used
+Had I had more time, the first area I would've focused was testing. I've used [Enzyme](https://enzymejs.github.io/enzyme/), often with [Jest]() for testing React components, and it would be my tool of choice for ensuring each component renders correctly in various scenarios depending on what props are passed to it. I would test basic scenarios with no people passed to the `<PeopleCards />` component, for the empty result set view, and 1 to many people rendering.
+
+I would also cover with an event-based interaction test the usage of each type of filter, from department sidebar filtering to typing in the search bar to filtering out people without profile images, both individually and filtered in combinations. Jest provides many types of assertions and test running scenarios we can run for frontend testing.
+
+From an accessibility standpoint, I would also take this app a step further.
 
 ### A note on the repository name
 
