@@ -21,7 +21,7 @@ Run `npm install` then `npm start`, and visit `http://localhost:3000/people` for
 
 ## App Demo
 
-![GIF of PR 1 progress](https://media.giphy.com/media/WzkUIfJ6MsLsssT56J/giphy.gif)
+![GIF of HashiCorp Humans App Demo](hashicorp-humans-demo.gif)
 
 ## Issues and other considerations
 
