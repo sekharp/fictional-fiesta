@@ -13,4 +13,8 @@
   &:focus {
     border-radius: 0;
   }
+
+  @media (max-width: 540px) {
+    width: 20em;
+  }
 }

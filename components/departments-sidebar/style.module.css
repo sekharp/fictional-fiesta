@@ -1,0 +1,57 @@
+.departmentsSidebar {
+  width: 25%;
+  line-height: 2.4em;
+
+  & h5 {
+    margin: 0;
+  }
+
+  & ul {
+    list-style: none;
+  }
+
+  & li {
+    cursor: pointer;
+    padding-left: 1em;
+  }
+
+  & > ul {
+    padding-left: 0.5em;
+  }
+
+  & span:hover,
+  & span.active {
+    color: #1563ff;
+  }
+
+  & li.expands {
+    position: relative;
+    border-left: 1px solid transparent;
+  }
+
+  & .expands > ul {
+    display: none;
+  }
+
+  & .expands.active > ul {
+    display: block;
+    border-left: 1px solid #cbcbcb;
+    margin-left: 0;
+    padding-left: 1em;
+  }
+
+  & li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: #cbcbcb;
+  }
+
+  & .expands.active::before {
+    transform: rotate(90deg);
+  }
+
+  @media (max-width: 936px) {
+    display: none;
+  }
+}

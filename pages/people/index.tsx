@@ -4,14 +4,25 @@ import Footer from '@hashicorp/react-footer'
 import style from './style.module.css'
 import query from './query.graphql'
 import rivetQuery from '@hashicorp/nextjs-scripts/dato/client'
+import {
+  isEmpty,
+  filter,
+  debounce,
+  includes,
+  lowerCase,
+  map,
+  split,
+} from 'lodash'
 import SearchBar from '../../components/searchbar/index'
-import { map, isEmpty, filter, debounce, includes, lowerCase } from 'lodash'
-import avatarDefault from './avatar-default.png'
 import AvatarFilter from '../../components/avatar-filter/index'
+import PeopleCards from '../../components/people-cards/index'
+import DepartmentsSidebar from '../../components/departments-sidebar/index'
 
 export default function PeoplePage({ allPeople, allDepartments }) {
   const [searchInput, useSearchInput] = useState('')
   const [isFilteredByAvatar, useFilterByAvatar] = useState(false)
+  const [departmentFilter, useFilterByDepartment] = useState(null)
+  const [expandedDepartments, useExpandedDepartments] = useState([])
 
   const handleSearch = ({ target }) => {
     debounceSearch(target.value)
@@ -19,6 +30,22 @@ export default function PeoplePage({ allPeople, allDepartments }) {
 
   const handleFilterByAvatar = () => {
     useFilterByAvatar(!isFilteredByAvatar)
+  }
+
+  const handleFilterByDepartment = ({ target }) => {
+    useFilterByDepartment(target.innerText)
+  }
+
+  const handleDepartmentExpansion = ({ target }) => {
+    const clickedDepartment = split(target.innerText, '\n', 1).shift()
+    if (includes(expandedDepartments, clickedDepartment))
+      useExpandedDepartments(
+        filter(
+          expandedDepartments,
+          (department) => department !== clickedDepartment
+        )
+      )
+    else useExpandedDepartments([...expandedDepartments, clickedDepartment])
   }
 
   const debounceSearch = useCallback(
@@ -37,11 +64,17 @@ export default function PeoplePage({ allPeople, allDepartments }) {
   if (isFilteredByAvatar) {
     filteredPeople = filter(filteredPeople, (p) => !isEmpty(p.avatar?.url))
   }
+  if (departmentFilter && departmentFilter?.length < 20) {
+    filteredPeople = filter(
+      filteredPeople,
+      (p) => p.department.name === departmentFilter
+    )
+  }
 
   return (
     <>
       <Nav />
-      <main className={style.container}>
+      <main className={`${style.main} g-container`}>
         <br />
         <h1 className={style.pageHeader}>HashiCorp Humans</h1>
         <h6 className={style.pageSubheader}>Find a HashiCorp Human</h6>
@@ -50,33 +83,18 @@ export default function PeoplePage({ allPeople, allDepartments }) {
 
         <AvatarFilter onClick={handleFilterByAvatar} />
 
-        <div id="people-container">
-          {isEmpty(filteredPeople) && <p>No results found.</p>}
-          {map(filteredPeople, (p) => {
-            return (
-              <div className={style.personCard}>
-                <img
-                  className={style.avatar}
-                  src={p.avatar?.url || avatarDefault}
-                  alt={p.avatar?.alt}
-                />
-                <div className={style.personCardContainer}>
-                  <span>
-                    <strong>{p.name}</strong>
-                  </span>
-                  <br />
-                  <span>{p.title}</span>
-                  <br />
-                  <span>{p.department.name}</span>
-                  <br />
-                </div>
-              </div>
-            )
-          })}
+        <div className={style.container}>
+          <DepartmentsSidebar
+            departments={allDepartments}
+            onClick={handleFilterByDepartment}
+            departmentFilter={departmentFilter}
+            handleDepartmentItemExpansion={handleDepartmentExpansion}
+            expandedDepartments={expandedDepartments}
+          />
+
+          <PeopleCards people={filteredPeople} />
         </div>
-        {/* <pre className={style.myData}>
-          {JSON.stringify(allDepartments, null, 2)}
-        </pre> */}
+
         <br />
       </main>
       <Footer />

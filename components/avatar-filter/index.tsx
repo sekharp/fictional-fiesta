@@ -2,7 +2,7 @@ import style from './style.module.css'
 
 const AvatarFilter = ({ onClick }) => {
   return (
-    <div className={style.avatarFilter}>
+    <div id="avatar-filter" className={style.avatarFilter}>
       <input
         id="avatar-filter"
         type="checkbox"
