@@ -47,6 +47,10 @@
     color: #cbcbcb;
   }
 
+  & .expands.active::before {
+    transform: rotate(90deg);
+  }
+
   @media (max-width: 936px) {
     display: none;
   }

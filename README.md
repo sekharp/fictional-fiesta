@@ -25,9 +25,11 @@ Run `npm install` then `npm start`, and visit `http://localhost:3000/people` for
 
 ## Issues and other considerations
 
-I spent the bulk of my time meeting the Figma spec and coding the baseline functionality. Had I had more time, I would've...
+I spent the bulk of my time (~10 hours) meeting the Figma spec and coding the baseline functionality. The only issue from the baseline spec that I had at the end was getting a list item image to use a custom caret image png asset. I used a `>` character as the placeholder instead in the interest of time.
 
-## A note on the repository name
+Had I had more time, the first area I would've focused was testing. I've used
+
+### A note on the repository name
 
 I took Github's first repository name suggestion!
 
