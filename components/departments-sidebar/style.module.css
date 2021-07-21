@@ -2,8 +2,12 @@
   width: 25%;
   line-height: 2.4em;
 
+  & h5 {
+    margin: 0;
+  }
+
   & ul {
-    list-style-type: none;
+    list-style-image: url('./caret.png');
   }
 
   & li {
@@ -20,7 +24,6 @@
   }
 
   & li.expands {
-    list-style-type: none;
     position: relative;
     border-left: 1px solid transparent;
   }
@@ -34,19 +37,6 @@
     border-left: 1px solid #cbcbcb;
     margin-left: 0;
     padding-left: 1em;
-  }
-
-  & .expands::before {
-    position: absolute;
-    display: inline-block;
-    left: -10px;
-    top: 10px;
-    width: 0.5em;
-    height: 0.5em;
-  }
-
-  & .expands:hover::before {
-    left: -16px;
   }
 
   @media (max-width: 936px) {
