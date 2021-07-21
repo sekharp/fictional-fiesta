@@ -1,5 +1,5 @@
 import style from './style.module.css'
-import { map, isEmpty, filter, includes } from 'lodash'
+import { map, isEmpty, filter, includes, startCase } from 'lodash'
 import { arrangeDepartments } from './../utils/arrange-departments'
 
 const DepartmentsSidebar = ({
@@ -19,7 +19,7 @@ const DepartmentsSidebar = ({
           const isExpandedWithChildren = d?.children?.length && isExpanded(d)
           return (
             <li
-              key={d.id}
+              key={d.name}
               onClick={handleDepartmentItemExpansion}
               aria-expanded={isExpanded(d)}
               className={`${isExpandedWithChildren && style.active} ${
@@ -31,7 +31,7 @@ const DepartmentsSidebar = ({
                 onClick={onClick}
                 key={d.id}
               >
-                {d.name}
+                {startCase(d.name)}
               </span>
               {!isEmpty(d?.children) && renderDepartmentListItems(d.children)}
             </li>

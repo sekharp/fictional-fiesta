@@ -7,11 +7,12 @@
   }
 
   & ul {
-    list-style-image: url('./caret.png');
+    list-style: none;
   }
 
   & li {
     cursor: pointer;
+    padding-left: 1em;
   }
 
   & > ul {
@@ -37,6 +38,13 @@
     border-left: 1px solid #cbcbcb;
     margin-left: 0;
     padding-left: 1em;
+  }
+
+  & li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: #cbcbcb;
   }
 
   @media (max-width: 936px) {
