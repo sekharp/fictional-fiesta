@@ -51,7 +51,8 @@
     transform: rotate(90deg);
   }
 
-  @media (max-width: 936px) {
+  /* Viewport size of a 2020 iPad Air */
+  @media (max-width: 820px) {
     display: none;
   }
 }

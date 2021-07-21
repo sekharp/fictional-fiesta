@@ -5,13 +5,14 @@
   padding: 0;
   margin: 0;
 
-  @media (max-width: 936px) {
+  /* Viewport size of a 2020 iPad Air */
+  @media (max-width: 820px) {
     width: 100%;
   }
 }
 
 .personCard {
-  height: 20em;
+  height: 22em;
   width: 25%;
   text-align: center;
   display: inline-block;
@@ -22,16 +23,16 @@
   font-family: 'Open Sans', sans-serif;
 
   &:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   }
 
-  @media (max-width: 936px) {
+  @media (max-width: 820px) {
     margin: 1em auto;
     width: 100%;
   }
 }
 
-@media (max-width: 936px) {
+@media (max-width: 820px) {
   .departmentName {
     display: none;
   }
@@ -40,8 +41,8 @@
 .avatar {
   display: block;
   margin: 0.25em auto;
-  border-radius: 50%;
-  width: 6.5em;
+  border-radius: 250px;
+  width: 8em;
 }
 
 .personCardBody {

@@ -11,9 +11,9 @@ This app has the following features built:
 - People are rendered in view with fallback default Avatar image
 - A checkbox input filters people with no profile image out
 - An individual department chosen via clicking the sidebar filters people to just that department
-- Filtered results update as you type, searching by name only, with a debounce so the page does not refresh too rapidly per keystroke (1sec debounce)
+- Filtered results update as you type, searching by name only, with a debounce so the page does not refresh too rapidly per keystroke (1 second debounce)
 - Multiple filters can be used simultaneously including search
-- Views on mobile are responsive (can see them shown in the demo)
+- Views on mobile are responsive (can see them shown in the demo), for both tablet and phone sizes
 
 ## How to run the app locally
 
@@ -25,11 +25,11 @@ Run `npm install` then `npm start`, and visit `http://localhost:3000/people` for
 
 ## Issues and other considerations
 
-I spent the bulk of my time (~10 hours) meeting the Figma spec and coding the baseline functionality. The only issue from the baseline spec that I had at the end was getting a list item image to use a custom caret image png asset. I used a `>` character as the placeholder instead in the interest of time.
+I spent the bulk of my time (~10-12 hours) meeting the Figma spec and coding the baseline functionality. The only issue from the baseline spec that I had at the end was getting a list item image or background to use a custom caret image png asset. I used a `>` character as the placeholder instead in the interest of time.
 
-I would also like to tighten up the styling, look at many mobile responsiveness scenarios (to ensure no text on the people cards bleed past the card borders), and write cleaner HTML, leaning less on things like `<br/>` for new lines. My CSS as a whole could use more specificity to match the Figma spec more closely.
+With more time, I would also like to tighten up the styling as a whole, look at many mobile responsiveness scenarios (to ensure no text on the people cards bleed past the card borders), and write cleaner HTML. My CSS as a whole could use more specificity to match the Figma spec more closely.
 
-Two big issues though I would focus on are testing and accessibility.
+Above all, the two big issues I would focus on with more time are testing and accessibility.
 
 ### Testing
 
